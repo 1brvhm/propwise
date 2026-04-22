@@ -1,26 +1,115 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ============================================================
+   PROPWISE DESIGN SYSTEM — Tailwind v4 CSS Configuration
+   ============================================================ */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@theme {
+  /* ---- Brand Colors ---- */
+  --color-emerald-50:  #ecfdf5;
+  --color-emerald-100: #d1fae5;
+  --color-emerald-200: #a7f3d0;
+  --color-emerald-300: #6ee7b7;
+  --color-emerald-400: #34d399;
+  --color-emerald-500: #10b981;
+  --color-emerald-600: #059669;
+  --color-emerald-700: #047857;
+  --color-emerald-800: #065f46;
+  --color-emerald-900: #064e3b;
+  --color-emerald-950: #022c22;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --color-gold-50:  #fffbeb;
+  --color-gold-100: #fef3c7;
+  --color-gold-200: #fde68a;
+  --color-gold-300: #fcd34d;
+  --color-gold-400: #fbbf24;
+  --color-gold-500: #f59e0b;
+  --color-gold-600: #d97706;
+  --color-gold-700: #b45309;
+  --color-gold-800: #92400e;
+  --color-gold-900: #78350f;
+  --color-gold-950: #451a03;
+
+  /* ---- Typography ---- */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* ---- Shadows ---- */
+  --shadow-card-glow: 0 0 0 1px rgba(16,185,129,0.15), 0 4px 24px rgba(16,185,129,0.08);
+  --shadow-gold-glow: 0 0 0 1px rgba(245,158,11,0.2), 0 4px 16px rgba(245,158,11,0.12);
+  --shadow-card:      0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
+
+  /* ---- Animations ---- */
+  --animate-shimmer:  shimmer 2s linear infinite;
+  --animate-fade-up:  fade-up 0.4s ease-out forwards;
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4,0,0.6,1) infinite;
+
+  /* ---- Keyframes ---- */
+  @keyframes shimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position:  200% 0; }
+  }
+  @keyframes fade-up {
+    0%   { opacity: 0; transform: translateY(16px); }
+    100% { opacity: 1; transform: translateY(0); }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ---- Root Variables ---- */
+:root {
+  --background: #020617;
+  --foreground: #f8fafc;
+}
+
+/* ---- Base Styles ---- */
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+
+  /* Premium custom scrollbar */
+  ::-webkit-scrollbar        { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track  { background: #0f172a; }
+  ::-webkit-scrollbar-thumb  { background: #334155; border-radius: 999px; }
+  ::-webkit-scrollbar-thumb:hover { background: #059669; }
+}
+
+/* ---- Utility Classes ---- */
+@layer utilities {
+  /* Brand gradients */
+  .bg-gradient-brand {
+    background-image: linear-gradient(135deg, #047857 0%, #059669 40%, #d97706 100%);
+  }
+  .bg-gradient-card {
+    background-image: linear-gradient(135deg, #064e3b 0%, #065f46 100%);
+  }
+  .bg-gradient-gold {
+    background-image: linear-gradient(135deg, #b45309 0%, #d97706 50%, #f59e0b 100%);
+  }
+  .text-gradient-brand {
+    background: linear-gradient(135deg, #10b981, #f59e0b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Skeleton loading */
+  .skeleton {
+    background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+
+  /* Glass effect */
+  .glass {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
 }
