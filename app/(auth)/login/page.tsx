@@ -46,16 +46,7 @@ export default function LoginPage() {
           email:    email.trim().toLowerCase(),
           password,
         })
-
-        if (authError) {
-          if (authError.message.toLowerCase().includes('email not confirmed')) {
-            await supabase.auth.resend({ type: 'signup', email: email.trim().toLowerCase() })
-            router.push(`/verify?email=${encodeURIComponent(email.trim().toLowerCase())}&type=signup`)
-            return
-          }
-          throw authError
-        }
-
+        if (authError) throw authError
         router.push('/dashboard')
 
       } else {
@@ -63,10 +54,8 @@ export default function LoginPage() {
           email:    email.trim().toLowerCase(),
           password,
         })
-
         if (authError) throw authError
-
-        router.push(`/verify?email=${encodeURIComponent(email.trim().toLowerCase())}&type=signup`)
+        router.push('/dashboard')
       }
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Something went wrong')
